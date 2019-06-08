@@ -59,6 +59,10 @@ spec:
         - mountPath: /etc/dnsmasq.d/02-custom.conf
           name: custom-dnsmasq
           subPath: 02-custom.conf
+        - mountPath: /tmp
+          name: cache-tmp
+        - mountPath: /var/log
+          name: cache-logs
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -72,4 +76,12 @@ spec:
           defaultMode: 420
           name: pihole-custom-dnsmasq
         name: custom-dnsmasq
+      - name: cache-tmp
+        emptyDir:
+          medium: "Memory"
+          sizeLimit: 500Mi
+      - name: cache-logs
+        emptyDir:
+          medium: "Memory"
+          sizeLimit: 50Mi
 status: {}
